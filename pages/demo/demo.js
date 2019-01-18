@@ -12,7 +12,7 @@ function initChart(canvas, width, height) {
 
   var option = {
     backgroundColor: 'rgba(255, 255, 255, 0)',
-    color: ["#37A2DA","#FF9F7F"],
+    color: ["#FF9F7F","#37A2DA"],
     tooltip: {},
     xAxis: {
       show: false
@@ -26,29 +26,29 @@ function initChart(canvas, width, height) {
         textStyle: {
           color: 'white',
         },
-        fontSize: 14, },
+        fontSize: 16, },
       // shape: 'circle',
       indicator: [{
         name: '单词',
-        max: 500
+        max: 100
       },
       {
         name: '句型',
-        max: 500
+        max: 100
       },
       {
         name: '语法',
-        max: 500
+        max: 100
       },
       {
         name: '篇章',
-        max: 500
+        max: 100
       }
       ]
     },
     
     title: {
-      text: 99,
+      text: wx.getStorageSync('testTotalScore'),
       x: 'center',
       y: 'center',
       textStyle: {
@@ -65,7 +65,7 @@ function initChart(canvas, width, height) {
         type: 'radar',
         itemStyle: { normal: { areaStyle: { type: 'default' } } },
         data: [{
-          value: [430, 340, 500, 300],
+          value: [wx.getStorageSync('testAbilityA'), wx.getStorageSync('testAbilityB'), wx.getStorageSync('testAbilityC'), wx.getStorageSync('testAbilityD')],
           name: '预算'
         }
         ]
@@ -99,11 +99,11 @@ Page({
     }
   },
   onLoad: function (options) {
-    var storageSyncContent = wx.getStorageSync('storageTotalScore')
-    this.setData({
-      storageSyncContent: storageSyncContent
-    });
-    console.log(storageSyncContent);
+    // var storageSyncContent = wx.getStorageSync('testTotalScore')
+    // this.setData({
+    //   storageSyncContent: storageSyncContent
+    // });
+    // console.log(storageSyncContent);
 
 
     this.setData({

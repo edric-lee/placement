@@ -56,7 +56,10 @@
   color:rgba(0, 0, 0, 0.5);
 }
 
-
+.course{
+  color: white;
+  font-size: 20px;
+}
 
 
 

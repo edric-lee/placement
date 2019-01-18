@@ -6,17 +6,17 @@
 
 </view>
 <view class="grade">
-<navigator url="../test/test" >
-  <view class="grade1 gradual-orange  shadow-blur">
+<!-- <navigator url="../test/test" > -->
+  <view class="grade3 gradual-orange  shadow-blur " bindtap='grade3'>
     <text class="gradualIcon icon-icon:before"></text>
     <text class="gradualText "> 三年级</text>
   </view>
-  </navigator >
-  <view class="grade2 gradual-blue shadow-blur">
+  <!-- </navigator > -->
+  <view class="grade4 gradual-blue shadow-blur">
     <text class="gradualIcon icon-nianji:before"></text>
     <text class="gradualText"> 四年级</text>
   </view>
-  <view class="grade3 gradual-green shadow-blur">
+  <view class="grade5 gradual-green shadow-blur">
     <text class="gradualIcon icon-nianji1:before"></text>
     <text class="gradualText"> 五年级</text>
   </view>

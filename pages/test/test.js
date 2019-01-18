@@ -8,6 +8,7 @@ Page({
   data: {
     timer: '', //定时器名字
     countDownNum: '5', //倒计时初始值
+    grade: "",
     qid: 0,
     abilityA: 0,
     abilityB: 0,
@@ -23,8 +24,7 @@ Page({
     checked: false,
     counTime: "",
     btnDisabled: true,
-    abilityScore:[],
-    abilityMask: [['单词', 0], ['句型', 0], ['语法', 0], ['篇章', 0]],
+    abilityScore: [],
     aList: [{
         id: 1,
         topicID: 1,
@@ -126,10 +126,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+
     this.setData({
       navH: App.globalData.navHeight
     });
-
+    var grade = wx.getStorageSync('grade');
+    console.log(this.data.aList[grade]);
   },
 
   /**
@@ -235,7 +237,6 @@ Page({
 
   refresh: function() {
     this.cleanRadio();
-    this.setData({btnDisabled: true});
     var counTime = false;
     // console.log("3" + counTime)
     this.setData({
@@ -246,9 +247,10 @@ Page({
     var counTime = true;
     // console.log("5" + counTime)
     this.setData({
-      counTime: counTime,
-    })
-    this.countDown();
+        counTime: counTime,
+      }),
+      this.countDown();
+
     var that = this;
     var qid = that.data.qid;
     if (that.data.aList.length > qid) {
@@ -257,29 +259,22 @@ Page({
       var answerB = that.data.aList[qid].answerB;
       var answerC = that.data.aList[qid].answerC;
       var answerD = that.data.aList[qid].answerD;
-      var answerRight = that.data.aList[qid].answerRight;
-      var scoreA = that.data.aList[qid].scoreA;
-      var scoreB = that.data.aList[qid].scoreB;
-      var scoreC = that.data.aList[qid].scoreC;
-      var scoreD = that.data.aList[qid].scoreD;
-      var option = that.data.option;
-      var abilityA = that.data.abilityA;
-      var abilityB = that.data.abilityB;
-      var abilityC = that.data.abilityC;
-      var abilityD = that.data.abilityD;
-      var totalScore = that.data.totalScore;
       var fullMaskA = that.data.fullMaskA;
       var fullMaskB = that.data.fullMaskB;
       var fullMaskC = that.data.fullMaskC;
       var fullMaskD = that.data.fullMaskD;
       var fullMask = that.data.fullMask;
+      var scoreA = that.data.aList[qid].scoreA;
+      var scoreB = that.data.aList[qid].scoreB;
+      var scoreC = that.data.aList[qid].scoreC;
+      var scoreD = that.data.aList[qid].scoreD;
       fullMaskA = fullMaskA + scoreA;
       fullMaskB = fullMaskB + scoreB;
       fullMaskC = fullMaskC + scoreC;
       fullMaskD = fullMaskD + scoreD;
       fullMask = fullMask + scoreA + scoreB + scoreC + scoreD;
+      console.log("fullMask:",fullMask)
       this.setData({
-        
         title: title,
         answerA: answerA,
         answerB: answerB,
@@ -292,58 +287,106 @@ Page({
         fullMask: fullMask,
         qid: qid + 1,
       })
-      if (option == answerRight) {
-        abilityA = abilityA + scoreA;
-        abilityB = abilityB + scoreB;
-        abilityC = abilityC + scoreC;
-        abilityD = abilityD + scoreD;
-        totalScore = totalScore + scoreA + scoreB + scoreC + scoreD;
-        this.setData({
-          abilityA: abilityA,
-          abilityB: abilityB,
-          abilityC: abilityC,
-          abilityD: abilityD,
-          totalScore: totalScore,
-        })
-      }
     } else {
       wx.showModal({
-          title: '测试完成',
-          content: '交卷',
-          showCancel: false,
-          success: function(res) {
-            if (res.confirm) {
-              
-              var abilityScore = that.data.abilityScore;
-              var abilityA = that.data.abilityA;
-              var abilityB = that.data.abilityB;
-              var abilityC = that.data.abilityC;
-              var abilityD = that.data.abilityD;
-              abilityScore.splice(0, 0, ["单词", abilityA], ["句型", abilityB], ["语法", abilityC], ["篇章", abilityD]);
-            
+        title: '测试完成',
+        content: '交卷',
+        showCancel: false,
+        success: function(res) {
+          if (res.confirm) {
 
-
-
-
-              var testTotalScore = that.data.totalScore;//总分
-              var testFullMask = that.data.fullMask;//满分
-
-              console.log(abilityScore);
-              wx.setStorageSync('testTotalScore', testTotalScore);
-              wx.setStorageSync('testFullMask', testFullMask);
-              wx.navigateTo({//页面跳转
-                title: "comlate",
-                url: '../demo/demo'
-              })
-              
+            var abilityScore = that.data.abilityScore;
+            if (that.data.abilityA != 0 && that.data.fullMaskA != 0) {
+              var testAbilityA = that.data.abilityA / that.data.fullMaskA * 100
             } else {
-              console.log('弹框后点取消')
+              var testAbilityA = 0
             }
+
+            if (that.data.abilityB != 0 && that.data.fullMaskB != 0) {
+              var testAbilityB = that.data.abilityB / that.data.fullMaskB * 100
+            } else {
+              var testAbilityB = 0
+            }
+
+            if (that.data.abilityC != 0 && that.data.fullMaskC != 0) {
+              var testAbilityC = that.data.abilityC / that.data.fullMaskC * 100
+            } else {
+              var testAbilityC = 0
+            }
+
+            if (that.data.abilityD != 0 && that.data.fullMaskD != 0) {
+              var testAbilityD = that.data.abilityD / that.data.fullMaskD * 100
+            } else {
+              var testAbilityD = 0
+            }
+
+            if (that.data.totalScore != 0 && that.data.fullMask != 0) {
+              var testTotalScore = Math.round(that.data.totalScore / that.data.fullMask * 100)
+            } else {
+              var testTotalScore = 0
+            }
+            var testFullMask = that.data.fullMask; //满分
+
+            console.log(testAbilityA, testAbilityB, testAbilityC, testAbilityD);
+            wx.setStorageSync('testTotalScore', testTotalScore);
+            wx.setStorageSync('testFullMask', testFullMask);
+            wx.setStorageSync('testAbilityA', testAbilityA);
+            wx.setStorageSync('testAbilityB', testAbilityB);
+            wx.setStorageSync('testAbilityC', testAbilityC);
+            wx.setStorageSync('testAbilityD', testAbilityD);
+
+            wx.navigateTo({ //页面跳转
+              title: "comlate",
+              url: '../demo/demo'
+            })
+
+          } else {
+            console.log('弹框后点取消')
           }
         }
-
-      )
+      })
     }
+  },
+  ///题目
+
+
+
+  next: function() {
+    this.setData({
+      btnDisabled: true
+    });
+    var that = this;
+    var qid = that.data.qid-1;
+    var answerRight = that.data.aList[qid].answerRight;
+    var scoreA = that.data.aList[qid].scoreA;
+    var scoreB = that.data.aList[qid].scoreB;
+    var scoreC = that.data.aList[qid].scoreC;
+    var scoreD = that.data.aList[qid].scoreD;
+    var option = that.data.option;
+    var abilityA = that.data.abilityA;
+    var abilityB = that.data.abilityB;
+    var abilityC = that.data.abilityC;
+    var abilityD = that.data.abilityD;
+    var totalScore = that.data.totalScore;
+
+    console.log("answerRight:", qid,answerRight)
+    console.log("option:", option)
+    if (option == answerRight) {
+      abilityA = abilityA + scoreA;
+      abilityB = abilityB + scoreB;
+      abilityC = abilityC + scoreC;
+      abilityD = abilityD + scoreD;
+      totalScore = totalScore + scoreA + scoreB + scoreC + scoreD;
+      console.log(answerRight, abilityA, abilityB, abilityC, abilityD, totalScore)
+      this.setData({
+        abilityA: abilityA,
+        abilityB: abilityB,
+        abilityC: abilityC,
+        abilityD: abilityD,
+        totalScore: totalScore,
+      })
+    }
+    that.refresh();
   },
   radioChange: function(event) {
     var option = event.detail.value

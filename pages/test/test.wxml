@@ -39,5 +39,5 @@
   <view class='countDown'>还剩：
     <text style='color:red'>{{countDownNum}}</text>秒</view>
   <!-- <view class='bg-orange submit' bindtap='confirm'>上一题</view> -->
-  <button  class='btn bg-red submit' disabled="{{btnDisabled}}" bindtap='refresh'>下一题</button>
+  <button  class='btn bg-red submit' disabled="{{btnDisabled}}" bindtap='next'>下一题</button>
 </bar>

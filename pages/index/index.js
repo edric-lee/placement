@@ -50,5 +50,13 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  grade3: function (){
+    var grade = 1 ;
+    wx.setStorageSync('grade', grade);
+    wx.navigateTo({//页面跳转
+      url: '../test/test'
+    })
   }
+
 })
