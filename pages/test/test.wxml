@@ -1,0 +1,43 @@
+<view>
+  <view class="bg" style="width:100%;height:600rpx; ">
+    <view class='nav' style='height:{{navH}}px'>
+      <view class='buttonBack'>
+        <!-- <view class='icon-back' bindtap="bindFocus"></view> -->
+      </view>
+      <view class='nav-title'>
+        <text>泡泡入学测试</text>
+      </view>
+    </view>
+    <view class="Q">
+      <view style="width:90%">Q{{qid}}</view>
+    </view>
+    <view class="testBg">
+      <textarea class="question padding-sm" style="opacity:0.5">
+        {{title}}
+      </textarea>
+    </view>
+  </view>
+</view>
+
+<view class="wrap">
+  <radio-group class="radio" bindchange="radioChange">
+    <label class="item">
+      <radio  value="a" checked="{{checked}}" />{{answerA}}
+    </label>
+    <label class="item">
+      <radio value="b" checked="{{checked}}"   />{{answerB}}
+    </label>
+    <label class="item">
+      <radio value="c" checked="{{checked}}"   wx:if="{{answerC}}" />{{answerC}}
+    </label>
+    <label class="item">
+      <radio value="d" checked="{{checked}}"   wx:if="{{answerD}}" />{{answerD}}
+    </label>
+  </radio-group>
+</view>
+<bar class="bottomBar margin-top shop ">
+  <view class='countDown'>还剩：
+    <text style='color:red'>{{countDownNum}}</text>秒</view>
+  <!-- <view class='bg-orange submit' bindtap='confirm'>上一题</view> -->
+  <button  class='btn bg-red submit' disabled="{{btnDisabled}}" bindtap='refresh'>下一题</button>
+</bar>

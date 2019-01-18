@@ -1,0 +1,23 @@
+<view  >
+<!-- 
+  <avatar class="xl round margin-left" style="background-image:url(https://image.weilanwl.com/img/square-4.jpg);"></avatar> -->
+ 
+  <open-data class="avatar" type='userAvatarUrl'></open-data>
+
+</view>
+<view class="grade">
+<navigator url="../test/test" >
+  <view class="grade1 gradual-orange  shadow-blur">
+    <text class="gradualIcon icon-icon:before"></text>
+    <text class="gradualText "> 三年级</text>
+  </view>
+  </navigator >
+  <view class="grade2 gradual-blue shadow-blur">
+    <text class="gradualIcon icon-nianji:before"></text>
+    <text class="gradualText"> 四年级</text>
+  </view>
+  <view class="grade3 gradual-green shadow-blur">
+    <text class="gradualIcon icon-nianji1:before"></text>
+    <text class="gradualText"> 五年级</text>
+  </view>
+</view>

@@ -1,0 +1,65 @@
+@import "../../css/iconfont.wxss";
+
+.avatar{
+  border-radius:50%;
+  overflow:hidden;
+  display:flex;
+  flex-direction: column;
+  align-content: center;
+  height:18v;
+  width:18vw;
+  margin:20px auto;
+  margin-top: 200rpx;
+  border: 3px solid white;
+}
+.grade{
+  margin:10% 10% 0 10%;
+   
+}
+.grade1{
+  height: 200rpx;
+  background-color: orange;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+.grade2{
+  height: 200rpx;
+  background-color: rebeccapurple;
+  display: flex;
+  justify-content: space-between;
+}
+.grade3{
+  height: 200rpx;
+  background-color:red;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.gradualText{
+  font-size: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 15%
+}
+.gradualIcon{
+  color:white;
+  font-size:110rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 10%
+}
+
+
+
+page {
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+}
